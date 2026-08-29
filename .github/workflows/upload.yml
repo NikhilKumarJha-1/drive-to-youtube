@@ -50,5 +50,5 @@ jobs:
               git push
             fi
           else
-            echo "No uploaded.json file created."
+            echo "uploaded.json was not created."
           fi
