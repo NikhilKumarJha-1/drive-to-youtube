@@ -40,10 +40,15 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          if git diff --quiet -- uploaded.json; then
-            echo "No upload history changes."
-          else
+          if [ -f uploaded.json ]; then
             git add uploaded.json
-            git commit -m "Update upload history"
-            git push
+
+            if git diff --cached --quiet; then
+              echo "No upload history changes."
+            else
+              git commit -m "Update upload history"
+              git push
+            fi
+          else
+            echo "No uploaded.json file created."
           fi
